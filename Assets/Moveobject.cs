@@ -9,6 +9,9 @@ public class Moveobject : MonoBehaviour {
 
 	float	posx;
 	float	posy;
+	
+	bool	levelhard;
+	bool	levelmedium;
 
 	// Use this for initialization
 	void Start () {
@@ -16,6 +19,9 @@ public class Moveobject : MonoBehaviour {
 		selected = false;
 		vertical = false;
 		move = false;
+		
+		levelhard = false;
+		levelmedium = false;
 
 	}
 	
@@ -24,29 +30,25 @@ public class Moveobject : MonoBehaviour {
 
 		if (Input.GetMouseButtonUp (0)) {
 		
-			Debug.Log("unselected");
 			selected = false;
 			vertical = false;
-		
-		}
-
-		if (Input.GetKeyDown (KeyCode.LeftCommand)) {
-			move = true;
-		}
-		if (Input.GetKeyUp (KeyCode.LeftCommand)) {
 			move = false;
+
 		}
 
-		if (Input.GetKeyDown (KeyCode.LeftControl) && move == false) {
+		if (Input.GetKeyDown (KeyCode.LeftCommand) && levelhard == true)
+			move = true;
+		if (Input.GetKeyUp (KeyCode.LeftCommand))
+			move = false;
+
+		if (Input.GetKeyDown (KeyCode.LeftControl) && move == false  && levelmedium == true)
 			vertical = true;
-		}
-		if (Input.GetKeyUp (KeyCode.LeftControl)) {
+		if (Input.GetKeyUp (KeyCode.LeftControl))
 			vertical = false;
-		}
 
 		if (selected == true) {
 
-			if (move == true){
+			if (move == true && levelhard == true){
 				
 				if (posy< Input.mousePosition.y)
 					transform.Translate(Vector3.up * Time.deltaTime * 2, Space.World);
@@ -60,14 +62,12 @@ public class Moveobject : MonoBehaviour {
 
 			} else {
 
-				if (vertical == true && move == false) {
+				if (vertical == true && move == false && levelmedium == true) {
 
 					if (posy < Input.mousePosition.y)
 						transform.Rotate(Vector3.right * 2, Space.World);
 					else if (posy > Input.mousePosition.y)
 						transform.Rotate(Vector3.left * 2, Space.World);
-					else
-						Debug.Log("Do not move");
 			
 				} else if (vertical == false && move == false) {
 				
@@ -75,8 +75,6 @@ public class Moveobject : MonoBehaviour {
 						transform.Rotate(Vector3.down * 2, Space.World);
 					else if (posx > Input.mousePosition.x)
 						transform.Rotate(Vector3.up * 2,Space.World);
-					else
-						Debug.Log("Do not move");
 
 				}
 
