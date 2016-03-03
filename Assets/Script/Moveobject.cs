@@ -1,32 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Moveobject : MonoBehaviour {
 
-	bool	selected;
-	bool	vertical;
-	bool	move;
+	bool									solved;
+	bool									selected;
+	bool									vertical;
+	bool									move;
 
-	float	posx;
-	float	posy;
-	
-	bool	levelhard;
-	bool	levelmedium;
+	float									posx;
+	float									posy;
+
+	public GameObject						keyx;
+	public GameObject						keyy;
+	public GameObject						keyz;
+
+	public Dictionary<string, GameObject> axes = new Dictionary<string, GameObject>();
 
 	// Use this for initialization
-	void Start () {
-	
+	void				Start () {
+
+		solved = false;
 		selected = false;
 		vertical = false;
 		move = false;
-		
-		levelhard = false;
-		levelmedium = false;
+
+		axes.Add ("x", keyx);
+		axes.Add ("y", keyy);
+		axes.Add ("z", keyz);
 
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void				Update () {
 
 		if (Input.GetMouseButtonUp (0)) {
 		
@@ -36,19 +43,19 @@ public class Moveobject : MonoBehaviour {
 
 		}
 
-		if (Input.GetKeyDown (KeyCode.LeftCommand) && levelhard == true)
+		if (Input.GetKeyDown (KeyCode.LeftCommand) && LevelManager.lman.ishard() == true)
 			move = true;
 		if (Input.GetKeyUp (KeyCode.LeftCommand))
 			move = false;
 
-		if (Input.GetKeyDown (KeyCode.LeftControl) && move == false  && levelmedium == true)
+		if (Input.GetKeyDown (KeyCode.LeftControl) && move == false  && LevelManager.lman.ismedium() == true)
 			vertical = true;
 		if (Input.GetKeyUp (KeyCode.LeftControl))
 			vertical = false;
 
 		if (selected == true) {
 
-			if (move == true && levelhard == true){
+			if (move == true && LevelManager.lman.ishard() == true){
 				
 				if (posy< Input.mousePosition.y)
 					transform.Translate(Vector3.up * Time.deltaTime * 2, Space.World);
@@ -62,7 +69,7 @@ public class Moveobject : MonoBehaviour {
 
 			} else {
 
-				if (vertical == true && move == false && levelmedium == true) {
+				if (vertical == true && move == false && LevelManager.lman.ismedium() == true) {
 
 					if (posy < Input.mousePosition.y)
 						transform.Rotate(Vector3.right * 2, Space.World);
@@ -86,11 +93,26 @@ public class Moveobject : MonoBehaviour {
 
 	}
 	
-	void OnMouseDown () {
+	void				OnMouseDown () {
 
-		posx = Input.mousePosition.x;
-		posy = Input.mousePosition.y;
-		selected = true;
+		if (solved == false) {
 
+			posx = Input.mousePosition.x;
+			posy = Input.mousePosition.y;
+			selected = true;
+
+		}
+		return;
 	}
+
+	public bool			selectedstate() {
+		return (selected);
+	}
+
+	public void			setsolved() {
+
+		solved = true;
+		return;
+	}
+
 }
