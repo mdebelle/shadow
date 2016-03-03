@@ -55,7 +55,7 @@ public class LevelManager : MonoBehaviour {
 
 	public void		setlock(string axe, bool state) {
 
-			axes[axe] = state;
+		axes[axe] = state;
 
 	}
 
