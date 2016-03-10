@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour {
-
+	
 	public GameObject		piece1;
+	public GameObject		piece2;
 	public int				level;
+	
+	public GameObject		shadowhelp;
+	bool					help;
 
 	static public LevelManager lman;
 
@@ -13,7 +17,9 @@ public class LevelManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+
+		help = false;
+
 		Vector3 euler = transform.eulerAngles;
 		
 		Vector3 position = Vector3.zero;
@@ -50,9 +56,27 @@ public class LevelManager : MonoBehaviour {
 
 		}
 
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			changeHelpMode();
+		}
+	
+
+
 	}
 
+	void	changeHelpMode(){
 
+		if (help == true) {
+			help = false;
+			shadowhelp.SetActive(false);
+		} else {
+			help = true;
+			shadowhelp.SetActive(true);
+		}
+		return;
+	}
+	
+	
 	public void		setlock(string axe, bool state) {
 
 		axes[axe] = state;

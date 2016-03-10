@@ -38,8 +38,6 @@ public class Moveobject : MonoBehaviour {
 		if (Input.GetMouseButtonUp (0)) {
 		
 			selected = false;
-			vertical = false;
-			move = false;
 
 		}
 
