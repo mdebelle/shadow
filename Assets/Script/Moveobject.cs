@@ -41,13 +41,15 @@ public class Moveobject : MonoBehaviour {
 
 		}
 
-		if (Input.GetKeyDown (KeyCode.LeftCommand) && LevelManager.lman.ishard() == true)
+		if (Input.GetKeyDown (KeyCode.LeftCommand) && LevelManager.lman.ishard () == true) {
 			move = true;
+		}
 		if (Input.GetKeyUp (KeyCode.LeftCommand))
 			move = false;
 
-		if (Input.GetKeyDown (KeyCode.LeftControl) && move == false  && LevelManager.lman.ismedium() == true)
+		if (Input.GetKeyDown (KeyCode.LeftControl) && move == false && LevelManager.lman.ismedium () == true) {
 			vertical = true;
+		}
 		if (Input.GetKeyUp (KeyCode.LeftControl))
 			vertical = false;
 

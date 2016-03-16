@@ -33,9 +33,9 @@ public class LevelManager : MonoBehaviour {
 
 		if (nbpuzzle == 2) {
 
-			axes.Add ("x1", false);
-			axes.Add ("y1", false);
-			axes.Add ("z1", false);
+			axes.Add ("x2", false);
+			axes.Add ("y2", false);
+			axes.Add ("z2", false);
 
 			piece2.transform.eulerAngles = setAngle (piece2);
 			piece2.transform.position = setPosition();
@@ -51,10 +51,12 @@ public class LevelManager : MonoBehaviour {
 		
 		if (axes ["x1"] == true && axes ["y1"] == true && axes ["z1"] == true) {
 			piece1.GetComponent<Moveobject>().setsolved();
+			Debug.Log ("yolo 1");
 			p1 = true;
 		}
 		if (nbpuzzle == 2 && axes ["x2"] == true && axes ["y2"] == true && axes ["z2"] == true) {
 			piece2.GetComponent<Moveobject>().setsolved();
+			Debug.Log ("yolo 2");
 			p2 = true;
 		}
 
@@ -98,15 +100,16 @@ public class LevelManager : MonoBehaviour {
 
 		if (level > 2 ) {
 			position.x = Random.Range(-5f, 5f);
+			position.y = Random.Range(-5f, 5f);
 		}
-		position.y = Random.Range(-5f, 5f);
 
 		return position;
 	}
 
 	public void		setlock(string axe, int piecenbr, bool state) { 
 
-		axes[axe + piecenbr.ToString()] = state;
+		string key = axe + piecenbr;
+		axes[key] = state;
 
 	}
 

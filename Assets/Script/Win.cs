@@ -16,13 +16,12 @@ public class Win : MonoBehaviour {
 	}
 	
 	void	OnTriggerStay(Collider other) {
-		
-		if (other.name == puzzle.GetComponent<Moveobject>().axes[axe].name ) {
-		
-			if (puzzle.GetComponent<Moveobject>().selectedstate() == false) {
-			
-				LevelManager.lman.setlock(axe, piecenumber, true);
 
+		if (other.transform.parent.name == puzzle.name) {
+			if (other.name == puzzle.GetComponent<Moveobject> ().axes [axe].name) {
+				if (puzzle.GetComponent<Moveobject> ().selectedstate () == false) {
+					LevelManager.lman.setlock (axe, piecenumber, true);
+				}
 			}
 		}
 
@@ -30,13 +29,11 @@ public class Win : MonoBehaviour {
 	
 	void	OnTriggerExit(Collider other) {
 
-
-		if (other.name == puzzle.GetComponent<Moveobject>().axes[axe].name ) {
-			
-			if (puzzle.GetComponent<Moveobject>().selectedstate() == false) {
-				
-				LevelManager.lman.setlock(axe, piecenumber, false);
-				
+		if (other.transform.parent.name == puzzle.name) {
+			if (other.name == puzzle.GetComponent<Moveobject> ().axes [axe].name) {
+				if (puzzle.GetComponent<Moveobject> ().selectedstate () == false) {
+					LevelManager.lman.setlock (axe, piecenumber, false);
+				}
 			}
 		}
 
