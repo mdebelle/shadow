@@ -7,6 +7,7 @@ public class Win : MonoBehaviour {
 	public GameObject	puzzle;
 	bool				locked;
 	public string		axe;
+	public int			piecenumber = 1;
 
 
 	// Use this for initialization
@@ -20,7 +21,7 @@ public class Win : MonoBehaviour {
 		
 			if (puzzle.GetComponent<Moveobject>().selectedstate() == false) {
 			
-				LevelManager.lman.setlock(axe, true);
+				LevelManager.lman.setlock(axe, piecenumber, true);
 
 			}
 		}
@@ -34,7 +35,7 @@ public class Win : MonoBehaviour {
 			
 			if (puzzle.GetComponent<Moveobject>().selectedstate() == false) {
 				
-				LevelManager.lman.setlock(axe, false);
+				LevelManager.lman.setlock(axe, piecenumber, false);
 				
 			}
 		}
