@@ -29,7 +29,7 @@ public class LevelManager : MonoBehaviour {
 		axes.Add ("z1", false);
 		
 		piece1.transform.eulerAngles = setAngle (piece1);		
-		piece1.transform.position = setPosition();
+		piece1.transform.position = setPosition(piece1);
 
 		if (nbpuzzle == 2) {
 
@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour {
 			axes.Add ("z2", false);
 
 			piece2.transform.eulerAngles = setAngle (piece2);
-			piece2.transform.position = setPosition();
+			piece2.transform.position = setPosition(piece2);
 			p2 = false;
 		}
 		lman = this.GetComponent<LevelManager> ();
@@ -70,6 +70,22 @@ public class LevelManager : MonoBehaviour {
 
 	}
 
+	//BACKGROUND
+	// rgb(52, 73, 94)
+	// rgb(44, 62, 80)
+
+	//BLOCKED
+	// rgb(231, 76, 60)
+	// rgb(192, 57, 43)
+
+	//CURRENT
+	// rgb(241, 196, 15)
+	// rgb(230, 126, 34)
+
+	//SUCCED
+	// rgb(26, 188, 156)
+	// rgb(39, 174, 96)
+
 	void	changeHelpMode(){
 
 		if (help == true) {
@@ -94,9 +110,9 @@ public class LevelManager : MonoBehaviour {
 		return euler;
 	}
 
-	Vector3 	setPosition(){
+	Vector3 	setPosition(GameObject piece){
 	
-		Vector3 position = Vector3.zero;
+		Vector3 position = piece.transform.position;
 
 		if (level > 2 ) {
 			position.x = Random.Range(-5f, 5f);
