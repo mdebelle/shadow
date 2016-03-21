@@ -16,13 +16,6 @@ public class levelselector : MonoBehaviour {
 		rend = GetComponent<Renderer>();
 		rend.enabled = true;
 
-		if (Locked == true) {
-			rend.sharedMaterial = Locked;
-		} else if (score == 0) {
-			rend.sharedMaterial = Current;
-		} else {
-			rend.sharedMaterial = Succed;
-		}
 	}
 	
 	// Update is called once per frame
@@ -40,5 +33,16 @@ public class levelselector : MonoBehaviour {
 
 	}
 
+	public void	setlevelinfo(int status){
+		
+		if (status < 0) {
+			rend.sharedMaterial = Locked;
+		} else if (status == 0) {
+			rend.sharedMaterial = Current;
+		} else {
+			rend.sharedMaterial = Succed;
+		}
+		return;
 
+	}
 }
