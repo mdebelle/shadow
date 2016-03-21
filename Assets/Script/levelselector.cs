@@ -7,6 +7,8 @@ public class levelselector : MonoBehaviour {
 	public Material Current;
 	public Material Succed;
 
+	public int		levelnumber;
+
 	Renderer 		rend;
 
 	int				score;
@@ -25,6 +27,11 @@ public class levelselector : MonoBehaviour {
 	
 	void				OnMouseDown () {
 
+		if (Mainmanager.mman.getslide () == false && Mainmanager.mman.getcurrentlevelfocus() == levelnumber) {
+
+			Debug.Log ("Lancer le level");
+
+		}
 
 		return;
 	}

@@ -6,9 +6,10 @@ public class Mainmanager : MonoBehaviour {
 	public	GameObject[]	Levels;
 	bool					slide;
 
-	float					mousex;
 	int						currentlevel;
 
+	
+	static public Mainmanager mman;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,7 @@ public class Mainmanager : MonoBehaviour {
 		}
 
 		slide = false;
+		mman = this.GetComponent<Mainmanager> ();
 
 	}
 	
@@ -50,6 +52,23 @@ public class Mainmanager : MonoBehaviour {
 		PlayerPrefs.SetInt("Ok", 1);
 		PlayerPrefs.Save ();
 		return;
+	}
+
+	public void		setslide(bool val){
+		slide = val;
+		return;
+	}
+
+	public bool		getslide(){
+		return slide;
+	}
+
+	public void		setcurrentlevelfocus(int val){
+		currentlevel = val;
+	}
+
+	public int		getcurrentlevelfocus(){
+		return currentlevel;
 	}
 
 	// Update is called once per frame
