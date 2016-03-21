@@ -5,7 +5,6 @@ public class cameramove : MonoBehaviour {
 
 	float			mousex;
 	int				current;
-	int				target;
 	public int		max;
 
 	float			speed;
@@ -14,9 +13,7 @@ public class cameramove : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
 		current = 0;
-		target = 0;
 		speed = 3f;
 		posz = transform.position.z;
 	}
@@ -33,7 +30,7 @@ public class cameramove : MonoBehaviour {
 			slidecamera(mousex - Input.mousePosition.x);
 		}
 
-		Vector3 t = new Vector3(transform.position.x, transform.position.y, target * 3f - 1f);
+		Vector3 t = new Vector3(transform.position.x, transform.position.y, current * 3f - 1f);
 		transform.position = Vector3.MoveTowards (transform.position, t, speed * Time.deltaTime);
 
 		if (posz == transform.position.z) {
@@ -50,10 +47,9 @@ public class cameramove : MonoBehaviour {
 	void	slidecamera(float direction){
 
 		if (direction < 0) {
-			target = (current > 0) ? current - 1 : current;
+			current = (current > 0) ? current - 1 : current;
 		} else if (direction > 0) {
-			target = (current < max) ? current + 1 : (max - 1);
+			current = (current < max) ? current + 1 : current;
 		}
-		current = target;
 	}
 }
