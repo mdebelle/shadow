@@ -8,6 +8,8 @@ public class Mainmanager : MonoBehaviour {
 
 	int						currentlevel;
 
+	bool					chief;
+
 	
 	static public Mainmanager mman;
 
@@ -20,7 +22,7 @@ public class Mainmanager : MonoBehaviour {
 		else
 			getDefaultData();
 
-
+		chief = false;
 		slide = false;
 		Debug.Log ("la");
 
@@ -59,6 +61,13 @@ public class Mainmanager : MonoBehaviour {
 		getDefaultData();
 		return;
 	}
+
+	public void		likeachief(){
+
+		chief = (chief == true) ? false : true;
+		return;
+	}
+
 
 	public void		setslide(bool val){
 		slide = val;

@@ -6,6 +6,7 @@ public class levelselector : MonoBehaviour {
 	public Material Locked;
 	public Material Current;
 	public Material Succed;
+	public Material Chief;
 
 	public int		levelnumber;
 
@@ -48,7 +49,10 @@ public class levelselector : MonoBehaviour {
 
 		Debug.Log ("render " + status);
 
-		if (status < 0) {
+
+		if (Mainmanager.mman.getchief () = true) {
+			rend.sharedMaterial = Chief;
+		} else if (status < 0) {
 			rend.sharedMaterial = Locked;
 		} else if (status == 0) {
 			rend.sharedMaterial = Current;
