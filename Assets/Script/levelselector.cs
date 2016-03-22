@@ -15,8 +15,6 @@ public class levelselector : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		rend = GetComponent<Renderer>();
-		rend.enabled = true;
 
 	}
 	
@@ -27,10 +25,13 @@ public class levelselector : MonoBehaviour {
 	
 	void				OnMouseDown () {
 
-		if (Mainmanager.mman.getslide () == false && Mainmanager.mman.getcurrentlevelfocus() == levelnumber) {
+		if (Mainmanager.mman.getslide () == false && Mainmanager.mman.getcurrentlevelfocus () == levelnumber) {
 
-			Application.LoadLevel(levelnumber + 1);
-
+			if (PlayerPrefs.GetInt ("Level"+levelnumber) >= 0) {
+				Application.LoadLevel (levelnumber + 1);
+			} else {
+				Debug.Log ("Forbiden");
+			}
 		}
 
 		return;
@@ -42,6 +43,11 @@ public class levelselector : MonoBehaviour {
 
 	public void	setlevelinfo(int status){
 		
+		rend = GetComponent<Renderer>();
+		rend.enabled = true;
+
+		Debug.Log ("render " + status);
+
 		if (status < 0) {
 			rend.sharedMaterial = Locked;
 		} else if (status == 0) {

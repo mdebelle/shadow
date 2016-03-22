@@ -64,8 +64,10 @@ public class LevelManager : MonoBehaviour {
 
 		if (p1 && p2) {
 			PlayerPrefs.SetInt("Level"+puzzle_number, 1);
-			if (puzzle_number < 3)
-				PlayerPrefs.SetInt("Level"+puzzle_number+1, 0);
+			if ( puzzle_number < 3 && PlayerPrefs.GetInt("Level"+(puzzle_number+1)) == -1) {
+				PlayerPrefs.SetInt("Level"+(puzzle_number+1), 0);
+			}
+			PlayerPrefs.Save ();
 			Application.LoadLevel(0);
 		}
 

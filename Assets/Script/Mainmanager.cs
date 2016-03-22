@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Mainmanager : MonoBehaviour {
 
-	public	GameObject[]	Levels;
+	public	levelselector[]	Levels;
 	bool					slide;
 
 	int						currentlevel;
@@ -13,15 +13,15 @@ public class Mainmanager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-		if (PlayerPrefs.GetInt("Ok") != 1){
+		
+		mman = this.GetComponent<Mainmanager> ();
+		if (PlayerPrefs.GetInt("Ok") != 1)
 			setDefaultData();
-		} else {
+		else
 			getDefaultData();
-		}
+
 
 		slide = false;
-		mman = this.GetComponent<Mainmanager> ();
 		Debug.Log ("la");
 
 	}
@@ -34,9 +34,7 @@ public class Mainmanager : MonoBehaviour {
 	
 	void	getDefaultData(){
 
-		Debug.Log ("lol");
 		for (int i = 0; i < Levels.Length; i++) {
-			Debug.Log ("lololo");
 			Levels[i].GetComponent<levelselector>().setlevelinfo(PlayerPrefs.GetInt ("Level"+i));
 		}
 		return;
@@ -57,6 +55,8 @@ public class Mainmanager : MonoBehaviour {
 
 		PlayerPrefs.SetInt("Ok", 1);
 		PlayerPrefs.Save ();
+
+		getDefaultData();
 		return;
 	}
 
