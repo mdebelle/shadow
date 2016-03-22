@@ -55,6 +55,9 @@ public class Mainmanager : MonoBehaviour {
 		PlayerPrefs.SetInt ("Level2", -1);
 		PlayerPrefs.SetInt ("Level3", -1);
 
+		PlayerPrefs.SetInt ("chief", 0);
+		chief = false;
+
 		PlayerPrefs.SetInt("Ok", 1);
 		PlayerPrefs.Save ();
 
@@ -65,9 +68,18 @@ public class Mainmanager : MonoBehaviour {
 	public void		likeachief(){
 
 		chief = (chief == true) ? false : true;
+
+		int c = (chief == true) ? 1 : 0;
+		PlayerPrefs.SetInt ("chief", c);
+		PlayerPrefs.Save ();
+
+		getDefaultData();
 		return;
 	}
 
+	public bool		getchief(){
+		return chief;
+	}
 
 	public void		setslide(bool val){
 		slide = val;

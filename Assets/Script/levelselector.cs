@@ -28,7 +28,10 @@ public class levelselector : MonoBehaviour {
 
 		if (Mainmanager.mman.getslide () == false && Mainmanager.mman.getcurrentlevelfocus () == levelnumber) {
 
-			if (PlayerPrefs.GetInt ("Level"+levelnumber) >= 0) {
+			if (Mainmanager.mman.getchief () == true) {
+				Application.LoadLevel (levelnumber + 1);
+			}
+			if (PlayerPrefs.GetInt ("Level" + levelnumber) >= 0) {
 				Application.LoadLevel (levelnumber + 1);
 			} else {
 				Debug.Log ("Forbiden");
@@ -50,7 +53,7 @@ public class levelselector : MonoBehaviour {
 		Debug.Log ("render " + status);
 
 
-		if (Mainmanager.mman.getchief () = true) {
+		if (Mainmanager.mman.getchief () == true) {
 			rend.sharedMaterial = Chief;
 		} else if (status < 0) {
 			rend.sharedMaterial = Locked;

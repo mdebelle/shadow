@@ -63,17 +63,25 @@ public class LevelManager : MonoBehaviour {
 		}
 
 		if (p1 && p2) {
-			PlayerPrefs.SetInt("Level"+puzzle_number, 1);
-			if ( puzzle_number < 3 && PlayerPrefs.GetInt("Level"+(puzzle_number+1)) == -1) {
-				PlayerPrefs.SetInt("Level"+(puzzle_number+1), 0);
+			
+			if (PlayerPrefs.GetInt("chief") == 0) {
+				PlayerPrefs.SetInt("Level"+puzzle_number, 1);
+				if ( puzzle_number < 3 && PlayerPrefs.GetInt("Level"+(puzzle_number+1)) == -1) {
+					PlayerPrefs.SetInt("Level"+(puzzle_number+1), 0);
+				}
+				PlayerPrefs.Save ();
 			}
-			PlayerPrefs.Save ();
 			Application.LoadLevel(0);
 		}
 
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			changeHelpMode();
 		}
+
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			Application.LoadLevel(0);
+		}
+
 
 	}
 
@@ -92,6 +100,10 @@ public class LevelManager : MonoBehaviour {
 	//SUCCED
 	// rgb(26, 188, 156)
 	// rgb(39, 174, 96)
+
+	//CHIEF
+	// rgb(142, 68, 173)
+	// rgb(236, 240, 241)
 
 	void	changeHelpMode(){
 
