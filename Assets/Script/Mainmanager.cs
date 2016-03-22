@@ -22,17 +22,21 @@ public class Mainmanager : MonoBehaviour {
 
 		slide = false;
 		mman = this.GetComponent<Mainmanager> ();
+		Debug.Log ("la");
 
 	}
-	
+
 	void	setDefaultData(){
+
+		resetAllData ();
 		return;
 	}
 	
 	void	getDefaultData(){
 
-		
+		Debug.Log ("lol");
 		for (int i = 0; i < Levels.Length; i++) {
+			Debug.Log ("lololo");
 			Levels[i].GetComponent<levelselector>().setlevelinfo(PlayerPrefs.GetInt ("Level"+i));
 		}
 		return;
@@ -40,6 +44,8 @@ public class Mainmanager : MonoBehaviour {
 
 
 	public void		resetAllData(){
+
+		Debug.Log("Reseted");
 
 		PlayerPrefs.DeleteAll();
 		PlayerPrefs.Save ();

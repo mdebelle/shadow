@@ -15,6 +15,8 @@ public class LevelManager : MonoBehaviour {
 	public GameObject		shadowhelp;
 	bool					help;
 
+	public int						puzzle_number;
+
 	static public LevelManager lman;
 
 	Dictionary<string, bool> axes = new Dictionary<string, bool>();
@@ -61,7 +63,10 @@ public class LevelManager : MonoBehaviour {
 		}
 
 		if (p1 && p2) {
-			Debug.Log ("You Win!");
+			PlayerPrefs.SetInt("Level"+puzzle_number, 1);
+			if (puzzle_number < 3)
+				PlayerPrefs.SetInt("Level"+puzzle_number+1, 0);
+			Application.LoadLevel(0);
 		}
 
 		if (Input.GetKeyDown (KeyCode.Space)) {

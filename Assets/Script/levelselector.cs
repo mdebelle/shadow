@@ -29,7 +29,7 @@ public class levelselector : MonoBehaviour {
 
 		if (Mainmanager.mman.getslide () == false && Mainmanager.mman.getcurrentlevelfocus() == levelnumber) {
 
-			Debug.Log ("Lancer le level");
+			Application.LoadLevel(levelnumber + 1);
 
 		}
 
