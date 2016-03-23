@@ -80,6 +80,12 @@ public class Mainmanager : MonoBehaviour {
 		return;
 	}
 
+	
+	public void		ThisistheEnd(){
+		Application.Quit();
+		return;
+	}
+
 	public bool		getchief(){
 		return chief;
 	}
