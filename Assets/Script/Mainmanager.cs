@@ -10,6 +10,8 @@ public class Mainmanager : MonoBehaviour {
 
 	bool					chief;
 
+	public GameObject		panel;
+	bool					panActive;
 	
 	static public Mainmanager mman;
 
@@ -23,6 +25,7 @@ public class Mainmanager : MonoBehaviour {
 			getDefaultData();
 
 		slide = false;
+		panActive = false;
 		Debug.Log ("la");
 
 	}
@@ -101,6 +104,11 @@ public class Mainmanager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			panActive = (panActive == true) ? false : true;
+			panel.SetActive(panActive);
+		}
+
 	}
 
 }
