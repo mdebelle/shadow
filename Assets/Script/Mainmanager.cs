@@ -22,7 +22,6 @@ public class Mainmanager : MonoBehaviour {
 		else
 			getDefaultData();
 
-		chief = false;
 		slide = false;
 		Debug.Log ("la");
 
@@ -35,7 +34,8 @@ public class Mainmanager : MonoBehaviour {
 	}
 	
 	void	getDefaultData(){
-
+		
+		chief = (PlayerPrefs.GetInt ("chief") == 1) ? true : false;
 		for (int i = 0; i < Levels.Length; i++) {
 			Levels[i].GetComponent<levelselector>().setlevelinfo(PlayerPrefs.GetInt ("Level"+i));
 		}

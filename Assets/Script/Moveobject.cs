@@ -109,9 +109,9 @@ public class Moveobject : MonoBehaviour {
 		return (selected);
 	}
 
-	public void			setsolved() {
+	public void			setsolved(bool val) {
 
-		solved = true;
+		solved = val;
 		return;
 	}
 

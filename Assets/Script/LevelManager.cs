@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour {
 
@@ -15,7 +16,9 @@ public class LevelManager : MonoBehaviour {
 	public GameObject		shadowhelp;
 	bool					help;
 
-	public int						puzzle_number;
+	public int				puzzle_number;
+
+	public	GameObject		PanelExit;
 
 	static public LevelManager lman;
 
@@ -32,6 +35,7 @@ public class LevelManager : MonoBehaviour {
 		
 		piece1.transform.eulerAngles = setAngle (piece1);		
 		piece1.transform.position = setPosition(piece1);
+		p1 = false;
 
 		if (nbpuzzle == 2) {
 
@@ -52,12 +56,12 @@ public class LevelManager : MonoBehaviour {
 	void Update () {
 		
 		if (axes ["x1"] == true && axes ["y1"] == true && axes ["z1"] == true) {
-			piece1.GetComponent<Moveobject>().setsolved();
+			piece1.GetComponent<Moveobject>().setsolved(true);
 			Debug.Log ("yolo 1");
 			p1 = true;
 		}
 		if (nbpuzzle == 2 && axes ["x2"] == true && axes ["y2"] == true && axes ["z2"] == true) {
-			piece2.GetComponent<Moveobject>().setsolved();
+			piece2.GetComponent<Moveobject>().setsolved(true);
 			Debug.Log ("yolo 2");
 			p2 = true;
 		}
@@ -71,7 +75,7 @@ public class LevelManager : MonoBehaviour {
 				}
 				PlayerPrefs.Save ();
 			}
-			Application.LoadLevel(0);
+			ActivePanel(false);
 		}
 
 		if (Input.GetKeyDown (KeyCode.Space)) {
@@ -79,31 +83,11 @@ public class LevelManager : MonoBehaviour {
 		}
 
 		if (Input.GetKeyDown (KeyCode.Escape)) {
-			Application.LoadLevel(0);
+			ActivePanel(true);
 		}
 
 
 	}
-
-	//BACKGROUND
-	// rgb(52, 73, 94)
-	// rgb(44, 62, 80)
-
-	//BLOCKED
-	// rgb(231, 76, 60)
-	// rgb(192, 57, 43)
-
-	//CURRENT
-	// rgb(241, 196, 15)
-	// rgb(230, 126, 34)
-
-	//SUCCED
-	// rgb(26, 188, 156)
-	// rgb(39, 174, 96)
-
-	//CHIEF
-	// rgb(142, 68, 173)
-	// rgb(236, 240, 241)
 
 	void	changeHelpMode(){
 
@@ -164,4 +148,68 @@ public class LevelManager : MonoBehaviour {
 		else
 			return false;
 	}
+
+
+	//
+	//  Pannel Menu Action
+	//
+
+	void	ActivePanel(bool isbreak){
+		
+		PanelExit.SetActive(true);
+		piece1.GetComponent<Collider>().enabled = false;
+		if (piece2)
+			piece2.GetComponent<Collider>().enabled = false;
+		
+		if (isbreak == true) {
+			GameObject.Find ("Panel/Tagline/Text").GetComponent<Text> ().text = "Have a Break";
+			GameObject.Find ("Panel/Panel/Continue").SetActive (true);
+		} else {
+			GameObject.Find("Panel/Tagline/Text").GetComponent<Text>().text = "Congratulation \nYou Win";
+		}
+		
+		return;
+	}
+	
+	public void	btnContinue() {
+		
+		GameObject.Find ("Canvas/Panel/Panel/Continue").SetActive (false);
+		PanelExit.SetActive (false);
+		piece1.GetComponent<Collider>().enabled = true;
+		if (piece2)
+			piece2.GetComponent<Collider>().enabled = true;
+
+	}
+	
+	public void	btnRestart() {
+
+		help = false;
+		axes["x1"] = false;
+		axes["y1"] = false;
+		axes["z1"] = false;
+		
+		piece1.transform.eulerAngles = setAngle (piece1);		
+		piece1.transform.position = setPosition(piece1);
+		piece1.GetComponent<Moveobject> ().setsolved (false);
+		p1 = false;
+		
+		if (nbpuzzle == 2) {
+			
+			axes["x2"] = false;
+			axes["y2"] = false;
+			axes["z2"] = false;
+			
+			piece2.transform.eulerAngles = setAngle (piece2);
+			piece2.transform.position = setPosition(piece2);
+			piece2.GetComponent<Moveobject> ().setsolved (false);
+			p2 = false;
+		}
+		btnContinue ();
+	}
+	
+	public void	btnMenu() {
+		
+		Application.LoadLevel (0);
+	}
+
 }
